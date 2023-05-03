@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('inventoryManagement')->group(function (){
+    Route::get('', [\App\Http\Controllers\inventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
+    Route::get('create',[\App\Http\Controllers\inventoryManagementController::class, "createView"])->name("inventoryManagement.create");
+    Route::get('item', [\App\Http\Controllers\inventoryManagementController::class, "getDetails"])->name("inventorymanagement.getDetails");
+
+    Route::post('saveItem',[\App\Http\Controllers\inventoryManagementController::class, "saveItem"])->name("inventoryManagement.save");
+});

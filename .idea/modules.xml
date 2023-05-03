@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/back-end-course-project-niko-brusselaers.iml" filepath="$PROJECT_DIR$/.idea/back-end-course-project-niko-brusselaers.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../back-end-exercises-niko-brusselaers/session5/lesson_5__demo/.idea/lesson_5__demo.iml" filepath="$PROJECT_DIR$/../../back-end-exercises-niko-brusselaers/session5/lesson_5__demo/.idea/lesson_5__demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../back-end-exercises-niko-brusselaers/session5/session_5/.idea/session_5.iml" filepath="$PROJECT_DIR$/../../back-end-exercises-niko-brusselaers/session5/session_5/.idea/session_5.iml" />
+    </modules>
+  </component>
+</project>

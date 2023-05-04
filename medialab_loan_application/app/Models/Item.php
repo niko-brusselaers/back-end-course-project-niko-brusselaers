@@ -10,11 +10,11 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name' => 'string',
-        'image' => 'blob',
-        'manual'=> 'string',
-        'comments' =>'string',
-        'lendingStatus' => 'string'
+        'name',
+        'image',
+        'manual',
+        'comments',
+        'lendingStatus'
     ];
     function getItems(){
 

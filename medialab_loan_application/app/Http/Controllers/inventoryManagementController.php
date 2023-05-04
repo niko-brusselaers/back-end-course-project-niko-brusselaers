@@ -19,14 +19,10 @@ class inventoryManagementController extends Controller
         return view('content.inventoryManagement.create');
     }
 
-    function getDetails(Request $request){
+    function getItem(Request $request){
         $item = new Item;
         $item = $item->getItem($request['itemId']);
         return view('content.inventoryManagement.itemDetails', ['item' => $item]);
-    }
-
-    function getItem(){
-
     }
 
 

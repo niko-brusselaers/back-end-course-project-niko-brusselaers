@@ -34,7 +34,9 @@ class inventoryManagementController extends Controller
     function updateItem(){
 
     }
-    function deleteItem(){
-
+    function deleteItem(Request $request){
+        $item = Item::find($request->itemId);
+        $item->delete();
+        return redirect()->action([inventoryManagementController::class, 'getIndex']);
     }
 }

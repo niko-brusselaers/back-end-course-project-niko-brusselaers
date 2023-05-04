@@ -24,4 +24,8 @@ class Item extends Model
     function getItem($id){
         return Item::where('id', $id)->first();
     }
+
+    function deleteItem($id){
+        return Item::find('id',$id)->first();
+    }
 }

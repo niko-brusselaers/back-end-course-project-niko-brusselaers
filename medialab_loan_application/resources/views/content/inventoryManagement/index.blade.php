@@ -7,7 +7,7 @@
                 <h3 class="card-title" >{{$item->name}}</h3>
                 <img src="{{$item->image}}" alt="{{$item->image}}">
                 <p>{{$item->lendingStatus}}</p>
-                <a class="btn btn-primary" href={{route("inventorymanagement.getDetails", ['itemId' => $item->id])}}>see more details</a>
+                <a class="btn btn-primary" href={{route("inventorymanagement.getItem", ['itemId' => $item->id])}}>see more details</a>
             </div>
         @endforeach
     </div>

@@ -23,7 +23,7 @@
                 </div>
 
                 <div class="d-flex w-50 justify-content-between align-item-center" style="">
-                    <a class="btn btn-secondary btn-lg p-2">edit item</a>
+                    <a class="btn btn-secondary btn-lg p-2" href="{{route("inventoryManagement.editView", ['itemId' => $item->id])}}">edit item</a>
                     <a class="btn btn-danger btn-lg p-2 " href={{route("inventoryManagement.deleteItem", ['itemId' => $item->id])}}>delete item</a>
                 </div>
             </div>

@@ -20,7 +20,7 @@ Route::get('/', function () {
 Route::prefix('inventoryManagement')->group(function (){
     Route::get('', [\App\Http\Controllers\inventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
     Route::get('create',[\App\Http\Controllers\inventoryManagementController::class, "createView"])->name("inventoryManagement.create");
-    Route::get('item', [\App\Http\Controllers\inventoryManagementController::class, "getItem"])->name("inventorymanagement.getItem");
+    Route::get('item', [\App\Http\Controllers\inventoryManagementController::class, "getItem"])->name("inventoryManagement.getItem");
 
     Route::post('saveItem',[\App\Http\Controllers\inventoryManagementController::class, "saveItem"])->name("inventoryManagement.saveItem");
 

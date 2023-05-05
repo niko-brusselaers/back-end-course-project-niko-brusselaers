@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class inventoryManagementController extends Controller
 {
@@ -27,7 +28,32 @@ class inventoryManagementController extends Controller
 
 
 
-    function saveItem(){
+    function saveItem(Request $request){
+        $request->validate([
+            "name"=> "required|min:5|max:60",
+            "image"=>"required",
+            "manual"=>"max:500",
+            "comments"=>"max:500"
+            ]);
+        $image = $request->file('image');
+        $imageName = $request->input('name') . '.' . $image->getClientOriginalExtension();
+        $image->store('itemImages');
+
+
+
+        $item = new Item([
+            "name" => $request->input('name'),
+            "image" => "$imageName",
+            "manual" => $request->input('manual') ||"",
+            "comments" =>$request->input('comments')||"",
+            "lendingStatus" => "available",
+            "created_at"=> date('Y-m-d H:i:s'),
+            "updated_at" => date('Y-m-d H:i:s')
+        ]);
+
+        $item->save();
+
+        return redirect()->action([inventoryManagementController::class, 'getIndex']);
 
     }
 

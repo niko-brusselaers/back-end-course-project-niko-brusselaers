@@ -20,7 +20,7 @@ class inventoryManagementController extends Controller
         return view('content.inventoryManagement.create');
     }
 
-    function  editView(Request $request){
+    function editView(Request $request){
         $item = new Item;
         $item = $item->getItem($request['itemId']);
         return view('content.inventoryManagement.edit', ['item' => $item]);
@@ -35,23 +35,26 @@ class inventoryManagementController extends Controller
 
 
     function saveItem(Request $request){
+
         $request->validate([
             "name"=> "required|min:5|max:60",
-            "image"=>"required|image",
+            "image"=>"required",
             "manual"=>"max:500",
             "comments"=>"max:500"
-            ]);
-        $image = $request->file('image');
-        $imageName = $request->input('name') . '.' . $image->getClientOriginalExtension();
+        ]);
+
+        $request = $request->all();
+
+        $image = $request['image'];
         $imagePath = $image->store('itemImages');
 
 
-
         $item = new Item([
-            "name" => $request->input('name'),
+
+            "name" => $request['name'],
             "image" => "$imagePath",
-            "manual" => $request->input('manual') ||"",
-            "comments" =>$request->input('comments')||"",
+            "manual" => $request['manual'],
+            "comments" => $request['comments'],
             "lendingStatus" => "available",
             "created_at"=> date('Y-m-d H:i:s'),
             "updated_at" => date('Y-m-d H:i:s')
@@ -60,12 +63,10 @@ class inventoryManagementController extends Controller
         $item->save();
 
         return redirect()->action([inventoryManagementController::class, 'getIndex']);
-
     }
 
     function editItem(Request $request){
         $request->validate([
-            "id" => "required",
             "name"=> "required|min:5|max:60",
             "image"=>"image",
             "manual"=>"max:500",
@@ -80,12 +81,10 @@ class inventoryManagementController extends Controller
         $item->manual = $request->input('manual');
         $item->comments = $request->input('comments');
 
-        if ($request->hasFile('image')){
+        if ($request->hasFile('image') ){
             Storage::delete($item->image);
             $image = $request->file('image');
-            $request->input('name') . '.' . $image->getClientOriginalExtension();
-            $imagePath = $image->store('itemImages');
-            $item->image = $imagePath;
+            $item->image = $image->store('itemImages');
 
         }
 

@@ -19,8 +19,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('image');
-            $table->text('manual');
-            $table->text('comments');
+            $table->text('manual')->nullable();
+            $table->text('comments')->nullable();
             $table->string('lendingStatus');
         });
     }
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('items');
     }
 };

@@ -16,16 +16,17 @@ class Item extends Model
         'comments',
         'lendingStatus'
     ];
-    function getItems(){
+    public function getItems(){
 
         return Item::all();
     }
 
-    function getItem($id){
+    public function getItem($id){
         return Item::where('id', $id)->first();
     }
 
-    function deleteItem($id){
-        return Item::find('id',$id)->first();
+    public function deleteItem($id){
+        $item = Item::find($id)->first();
+        $item->delete();
     }
 }

@@ -23,7 +23,9 @@ class adminController extends Controller
         return view('admin.createUser');
     }
 
-    public function EditUser(){
+    public function EditUser(Request $request){
+        $user = User::find($request->userId);
+        return view('admin.editUser', ['user' => $user]);
 
     }
 
@@ -57,6 +59,29 @@ class adminController extends Controller
             throw \Illuminate\Validation\ValidationException::withMessages(['password' => 'passwords do not match']);
         }
 
+    }
+
+    public function updateUser(Request $request){
+
+        $request->validate([
+            'id' => 'required',
+            'first_name'=> "required",
+            'last_name' => "required",
+            'userType' => 'required',
+            'role' => 'required',
+            'email' => "required",
+        ]);
+
+        $user = User::find($request->input('id'));
+
+        $user->first_name = $request->input('first_name');
+        $user->last_name = $request->input('last_name');
+        $user->userType = $request->input('userType');
+        $user->role = $request->input('role');
+        $user->email = $request->input('email');
+
+        $user->save();
+        return redirect()->action([adminController::class, 'getIndex']);
     }
 
     public function deleteUser(Request $request){

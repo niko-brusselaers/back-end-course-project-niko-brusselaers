@@ -11,8 +11,8 @@
         <h4 class="card-text">Email: <br>
             {{$user->email}}</h4>
         <div class="d-flex w-100 justify-content-between align-item-center" style="">
-            <a class="btn btn-secondary btn-lg p-2" href="{{route("admin.editUser", ['itemId' => $user->id])}}">edit item</a>
-            <a class="btn btn-danger btn-lg p-2 " href={{route("admin.deleteUser", ['itemId' => $user->id])}}>delete item</a>
+            <a class="btn btn-secondary btn-lg p-2" href="{{route("admin.editUser", ['userId' => $user->id])}}">edit item</a>
+            <a class="btn btn-danger btn-lg p-2 " href={{route("admin.deleteUser", ['userId' => $user->id])}}>delete item</a>
         </div>
     </div>
 @endsection

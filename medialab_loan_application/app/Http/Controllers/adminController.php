@@ -59,7 +59,11 @@ class adminController extends Controller
 
     }
 
-    public function deleteUser(){}
+    public function deleteUser(Request $request){
+        $user = User::find($request->userId);
+        $user->delete();
+        return redirect()->action([adminController::class, 'getIndex']);
+    }
 
 
 

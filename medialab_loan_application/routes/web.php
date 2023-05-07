@@ -36,7 +36,9 @@ Route::prefix('admin')->group(function (){
     Route::get('', [adminController::class, "getIndex"]) ->name("admin.index");
     Route::get('user',[adminController::class , "getUser"])->name('admin.getUser');
     Route::get('createUser', [adminController::class , "createUser"])->name('admin.createUser');
-    Route::get('editUser', [adminController::class , "EditUser" ])->name('admin.editU8ser');
+    Route::get('editUser', [adminController::class , "EditUser" ])->name('admin.editUser');
+
+    Route::post('createUser', [adminController::class, "saveUser"])->name('admin.saveUser');
 
 
 });

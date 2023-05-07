@@ -18,7 +18,10 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
+        'userType',
+        'role',
         'email',
         'password',
     ];
@@ -33,12 +36,21 @@ class User extends Authenticatable
         'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array<string, string>
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function loans(){
+        return $this->hasMany(Loan::class);
+    }
+
+    public function getUsers(){
+        return User::all();
+    }
+
+    public function getUser($id){
+        return User::find($id)->first();
+    }
+
+    public function deleteUser($id){
+        $item = User::find($id)->first();
+        $item->delete();
+    }
+
 }

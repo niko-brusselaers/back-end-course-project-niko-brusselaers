@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\inventoryManagementController;
+use App\Http\Controllers\adminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +20,23 @@ Route::get('/', function () {
 });
 
 Route::prefix('inventoryManagement')->group(function (){
-    Route::get('', [\App\Http\Controllers\inventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
-    Route::get('create',[\App\Http\Controllers\inventoryManagementController::class, "createView"])->name("inventoryManagement.create");
-    Route::get('item', [\App\Http\Controllers\inventoryManagementController::class, "getItem"])->name("inventoryManagement.getItem");
-    Route::get('edit', [\App\Http\Controllers\inventoryManagementController::class, 'editView'])->name("inventoryManagement.editView");
+    Route::get('', [inventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
+    Route::get('create',[inventoryManagementController::class, "createView"])->name("inventoryManagement.create");
+    Route::get('item', [inventoryManagementController::class, "getItem"])->name("inventoryManagement.getItem");
+    Route::get('edit', [inventoryManagementController::class, 'editView'])->name("inventoryManagement.editView");
 
-    Route::post('saveItem',[\App\Http\Controllers\inventoryManagementController::class, "saveItem"])->name("inventoryManagement.saveItem");
-    Route::post('editItem',[\App\Http\Controllers\inventoryManagementController::class, "editItem"])->name("inventoryManagement.editItem");
+    Route::post('saveItem',[inventoryManagementController::class, "saveItem"])->name("inventoryManagement.saveItem");
+    Route::post('editItem',[inventoryManagementController::class, "editItem"])->name("inventoryManagement.editItem");
 
 
-    Route::get('deleteItem',[\App\Http\Controllers\inventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
+    Route::get('deleteItem',[inventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
+});
+
+Route::prefix('admin')->group(function (){
+    Route::get('', [adminController::class, "getIndex"]) ->name("admin.index");
+    Route::get('user',[adminController::class , "getUser"])->name('admin.getUser');
+    Route::get('createUser', [adminController::class , "createUser"])->name('admin.createUser');
+    Route::get('editUser', [adminController::class , "EditUser" ])->name('admin.editU8ser');
+
+
 });

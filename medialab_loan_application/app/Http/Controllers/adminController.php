@@ -14,8 +14,9 @@ class adminController extends Controller
         return view('admin.index', ['users' => $users]);
     }
 
-    public function getUser(){
-
+    public function getUser(Request $request){
+        $user = user::find($request->input('userId'));
+        return view('admin.getuser', ['user' => $user]);
     }
 
     public function createUser(){
@@ -57,6 +58,8 @@ class adminController extends Controller
         }
 
     }
+
+    public function deleteUser(){}
 
 
 

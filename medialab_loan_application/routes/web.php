@@ -40,5 +40,7 @@ Route::prefix('admin')->group(function (){
 
     Route::post('createUser', [adminController::class, "saveUser"])->name('admin.saveUser');
 
+    Route::get('deleteUser', [adminController::class, 'deleteUser'])->name('admin.deleteUser');
+
 
 });

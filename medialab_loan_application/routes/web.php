@@ -51,5 +51,7 @@ Route::prefix('loanSystem')->group(function (){
     Route::get('', [LoanSystemController::class, "index"])->name("loanSystem.index");
     Route::get('loan',[LoanSystemController::class , "get"])->name('loanSystem.get');
     Route::get('create', [LoanSystemController::class , "create"])->name('loanSystem.create');
-    Route::get('editr', [LoanSystemController::class , "edit" ])->name('loanSystem.edit');
+    Route::get('edit', [LoanSystemController::class , "edit" ])->name('loanSystem.edit');
+
+    Route::get('delete', [LoanSystemController::class, "delete"])->name("loanSystem.delete");
 });

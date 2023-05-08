@@ -27,5 +27,9 @@ class LoanSystemController extends Controller
         return view('content.loanSystem.create');
     }
 
+    public function delete(){
+
+    }
+
 
 }

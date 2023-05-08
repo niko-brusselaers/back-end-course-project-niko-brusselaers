@@ -43,7 +43,7 @@ class adminController extends Controller
 
         if ($request->input('password') == $request->input('confirmPassword')){
 
-            $user = new User([
+             $user = new User([
                 'first_name'=> $request->input('first_name'),
                 'last_name' => $request->input('last_name'),
                 'email' => $request->input('email'),

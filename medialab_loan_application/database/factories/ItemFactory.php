@@ -21,7 +21,7 @@ class ItemFactory extends Factory
             'image'=> fake()->image(),
             'manual'=> fake()->text(),
             'comments' => fake()->text,
-            'lendingStatus' => fake()->text
+            'lendingStatus' => 'available'
         ];
     }
 }

@@ -10,7 +10,7 @@
               class="p-5">
             <div class="row mt-5">
                 <div class="col">
-                    <label for="itemName" class="form-label">Item Name:</label>
+                    <label for="itemName" class="form-label">Item:</label>
                     <input type="text"  name="itemName" id="itemName"
                            placeholder="name of product" required
                            class="form-control" >
@@ -32,7 +32,7 @@
                            placeholder="name of product" required
                            class="form-control" >
                 </div>
-                <div class="col">   
+                <div class="col">
                     <label for="endDate"
                            class="form-label">End date:</label>
                     <input type="date"  name="endDate" id="endDate" min="{{$currentDate}}"

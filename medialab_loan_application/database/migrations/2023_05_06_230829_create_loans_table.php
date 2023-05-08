@@ -18,7 +18,7 @@ return new class extends Migration
             $table->date('end_date');
             $table->foreignId('item_id')->constrained();
             $table->foreignId('user_id')->constrained();
-            $table->text('comments')->nullable();
+            $table->text('comment')->nullable();
         });
     }
 

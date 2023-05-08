@@ -15,8 +15,8 @@
                     <h3>updated at: </h3>
                     <p>{{$loan->updated_at}}</p>
                 </div>
-                <h3>from: {{$loan->from_date}}</h3>
-                <h3>until:{{$loan->until_date}}</h3>
+                <h3>from: {{$loan->start_date}}</h3>
+                <h3>until:{{$loan->end_date}}</h3>
                 <div class="pt-3 h-25">
                     <h2>comments: <br> </h2>
                     <p>{{$loan->comments}}</p>
@@ -24,7 +24,7 @@
 
                 <div class="d-flex justify-content-between align-item-center container-fluid" >
                     <a class="btn btn-secondary btn-lg " href="{{route("loanSystem.edit", ['loanId' => $loan->id])}}">edit item</a>
-                    <a class="btn btn-danger btn-lg ms-4 " href={{route("loanSystem.delete", ['loanId' => $loan->id])}}>delete item</a>
+                    <a class="btn btn-danger btn-lg ms-4 " href={{route("loanSystem.delete", ['loanId' => $loan->id])}}>remove loan</a>
                 </div>
             </div>
 

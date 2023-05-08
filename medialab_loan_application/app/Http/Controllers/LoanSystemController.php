@@ -34,7 +34,7 @@ class LoanSystemController extends Controller
             'email'=> 'required',
             'startDate'=> 'required',
             'endDate' => 'required',
-            'comments' => 'max:500'
+            'comment' => 'max:500'
         ]);
 
 
@@ -56,7 +56,7 @@ class LoanSystemController extends Controller
         $loan = new Loan([
             'item_id' => $item[0]->id,
             'user_id' => $user[0]->id,
-            'comments' => $request->all()['comment'],
+            'comment' => $request->all()['comment'],
             'start_date'=> $request->input('startDate'),
             'end_date' => $request->input('endDate'),
             'created_at' => date('Y-m-d H:i:s'),
@@ -64,6 +64,23 @@ class LoanSystemController extends Controller
         ]);
         $loan->save();
         return redirect()->action([LoanSystemController::class, "index"]);
+    }
+
+    public function editLoan(Request $request){
+        $request->validate([
+            'id' => 'required',
+            'endDate' => 'required',
+            'comment' => 'max:500'
+        ]);
+
+        $loan = Loan::find($request->input('id'));
+
+        $loan->end_date = $request->input('endDate');
+        $loan->comment = $request->all()['comment'];
+
+        $loan->save();
+        return redirect()->action([LoanSystemController::class, "index"]);
+
     }
 
     public function delete(Request $request){

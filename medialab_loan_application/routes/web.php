@@ -47,13 +47,15 @@ Route::prefix('admin')->group(function (){
 
 });
 
-Route::prefix('loanSystem')->group(function (){
-    Route::get('', [LoanSystemController::class, "index"])->name("loanSystem.index");
-    Route::get('loan',[LoanSystemController::class , "get"])->name('loanSystem.get');
-    Route::get('create', [LoanSystemController::class , "create"])->name('loanSystem.create');
-    Route::get('edit', [LoanSystemController::class , "edit" ])->name('loanSystem.edit');
+Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(function (){
+    Route::get('', "index")->name("loanSystem.index");
+    Route::get('loan', "get")->name('loanSystem.get');
+    Route::get('create', "create")->name('loanSystem.create');
+    Route::get('edit', "edit")->name('loanSystem.edit');
 
-    Route::post('create',[LoanSystemController::class, "createLoan"])->name('loanSystem.create');
+    Route::post('create', "createLoan")->name('loanSystem.create');
+    Route::post('edit', "editLoan")->name('loanSystem.edit');
 
-    Route::get('delete', [LoanSystemController::class, "delete"])->name("loanSystem.delete");
+
+    Route::get('delete',  "delete")->name("loanSystem.delete");
 });

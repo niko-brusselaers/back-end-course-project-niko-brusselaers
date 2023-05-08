@@ -17,6 +17,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->foreignId('item_id')->constrained()->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->text('comments')->nullable();
         });
     }

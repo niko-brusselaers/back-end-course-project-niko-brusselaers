@@ -17,11 +17,11 @@ class Loan extends Model
     ];
 
     public function item(){
-        return $this->hasOne(Item::class);
+        return $this->belongsTo(Item::class);
     }
 
     public function user(){
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class);
     }
 
     public function getLoans(){

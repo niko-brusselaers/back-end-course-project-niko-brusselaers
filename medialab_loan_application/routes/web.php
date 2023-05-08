@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\inventoryManagementController;
 use App\Http\Controllers\adminController;
+use App\Http\Controllers\LoanSystemController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,4 +45,11 @@ Route::prefix('admin')->group(function (){
     Route::get('deleteUser', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
 
 
+});
+
+Route::prefix('loanSystem')->group(function (){
+    Route::get('', [LoanSystemController::class, "index"])->name("loanSystem.index");
+    Route::get('loan',[LoanSystemController::class , "get"])->name('loanSystem.get');
+    Route::get('create', [LoanSystemController::class , "create"])->name('loanSystem.create');
+    Route::get('editr', [LoanSystemController::class , "edit" ])->name('loanSystem.edit');
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InventoryManagementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,14 +19,14 @@ Route::get('/', function () {
 });
 
 Route::prefix('inventoryManagement')->group(function (){
-    Route::get('', [\App\Http\Controllers\inventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
-    Route::get('create',[\App\Http\Controllers\inventoryManagementController::class, "createView"])->name("inventoryManagement.create");
-    Route::get('item', [\App\Http\Controllers\inventoryManagementController::class, "getItem"])->name("inventoryManagement.getItem");
-    Route::get('edit', [\App\Http\Controllers\inventoryManagementController::class, 'editView'])->name("inventoryManagement.editView");
+    Route::get('', [InventoryManagementController::class, "getIndex"])->name("inventoryManagement.index");
+    Route::get('create',[InventoryManagementController::class, "createView"])->name("inventoryManagement.create");
+    Route::get('item', [InventoryManagementController::class, "getItem"])->name("inventoryManagement.getItem");
+    Route::get('edit', [InventoryManagementController::class, 'editView'])->name("inventoryManagement.editView");
 
-    Route::post('saveItem',[\App\Http\Controllers\inventoryManagementController::class, "saveItem"])->name("inventoryManagement.saveItem");
-    Route::post('editItem',[\App\Http\Controllers\inventoryManagementController::class, "editItem"])->name("inventoryManagement.editItem");
+    Route::post('saveItem',[InventoryManagementController::class, "saveItem"])->name("inventoryManagement.saveItem");
+    Route::post('editItem',[InventoryManagementController::class, "editItem"])->name("inventoryManagement.editItem");
 
 
-    Route::get('deleteItem',[\App\Http\Controllers\inventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
+    Route::get('deleteItem',[InventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
 });

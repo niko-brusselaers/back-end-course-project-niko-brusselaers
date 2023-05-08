@@ -14,6 +14,7 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
+        /*
         $roles = ['admin','lendingService', 'lender'];
         foreach (range(1, 20) as $index) {
             $user = new User([
@@ -26,6 +27,8 @@ class UserSeeder extends Seeder
             ]);
             $user->save();
         }
+        */
+        User::factory(20)->create();
 
     }
 }

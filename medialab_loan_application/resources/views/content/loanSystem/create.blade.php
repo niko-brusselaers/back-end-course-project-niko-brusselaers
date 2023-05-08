@@ -1,7 +1,9 @@
 @extends('layouts.loanSystem')
 
 @section('content')
-
+    <?php
+        $currentDate = date('Y-m-d')
+    ?>
     <div class="d-flex justify-content-center container-fluid" >
         <form action="{{route("loanSystem.create")}}"
               method="post" enctype="multipart/form-data"
@@ -10,15 +12,13 @@
                 <div class="col">
                     <label for="itemName" class="form-label">Item Name:</label>
                     <input type="text"  name="itemName" id="itemName"
-                           minlength="5" maxlength="60"
                            placeholder="name of product" required
                            class="form-control" >
                 </div>
                 <div class="col">
                     <label for="email" class="form-label">User email:</label>
-                    <input type="text"  name="email" id="email"
-                           minlength="5" maxlength="60"
-                           placeholder="name of product" required
+                    <input type="email"  name="email" id="email"
+                           placeholder="user email address" required
                            class="form-control" >
                 </div>
 
@@ -28,16 +28,14 @@
                 <div class="col">
                     <label for="startDate"
                            class="form-label">Start date:</label>
-                    <input type="date"  name="startDate" id="startDate"
-                           minlength="5" maxlength="60"
+                    <input type="date"  name="startDate" id="startDate" min="{{$currentDate}}"
                            placeholder="name of product" required
                            class="form-control" >
                 </div>
-                <div class="col">
+                <div class="col">   
                     <label for="endDate"
                            class="form-label">End date:</label>
-                    <input type="date"  name="endDate" id="endDate"
-                           minlength="5" maxlength="60"
+                    <input type="date"  name="endDate" id="endDate" min="{{$currentDate}}"
                            placeholder="name of product" required
                            class="form-control" >
                 </div>

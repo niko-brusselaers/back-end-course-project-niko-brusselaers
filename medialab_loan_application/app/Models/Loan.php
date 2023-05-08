@@ -13,7 +13,10 @@ class Loan extends Model
         "start_date",
         "end_date",
         'item_id',
-        "comments",
+        'user_id',
+        'created_at',
+        'updated_at',
+        "comments"
     ];
 
     public function item(){

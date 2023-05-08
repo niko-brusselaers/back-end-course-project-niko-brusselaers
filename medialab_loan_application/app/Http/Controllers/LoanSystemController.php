@@ -27,8 +27,10 @@ class LoanSystemController extends Controller
         return view('content.loanSystem.create');
     }
 
-    public function delete(){
-
+    public function delete(Request $request){
+        $loan = Loan::find($request->loanId);
+        $loan->delete();
+        return redirect()->action([LoanSystemController::class, "index"]);
     }
 
 

@@ -23,8 +23,8 @@
                 </div>
 
                 <div class="d-flex justify-content-between align-item-center container-fluid" >
-                    <a class="btn btn-secondary btn-lg " href="{{route("loanSystem.edit", ['itemId' => $loan->id])}}">edit item</a>
-                    <a class="btn btn-danger btn-lg ms-4 " href={{route("loanSystem.delete", ['itemId' => $loan->id])}}>delete item</a>
+                    <a class="btn btn-secondary btn-lg " href="{{route("loanSystem.edit", ['loanId' => $loan->id])}}">edit item</a>
+                    <a class="btn btn-danger btn-lg ms-4 " href={{route("loanSystem.delete", ['loanId' => $loan->id])}}>delete item</a>
                 </div>
             </div>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Loan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LoanSystemController extends Controller
 {
@@ -25,6 +26,19 @@ class LoanSystemController extends Controller
 
     public function create(){
         return view('content.loanSystem.create');
+    }
+
+    public function CreateLoan(Request $request){
+        $request->validate([
+            'itemName' => 'required',
+            'email'=> 'required',
+            'startDate'=> 'required',
+            'endDate' => 'required',
+            'comments' => 'max:500'
+        ]);
+
+        $item = DB::table('items')->where('name','=', $request->input('item Name'));
+        dd($item);
     }
 
     public function delete(Request $request){

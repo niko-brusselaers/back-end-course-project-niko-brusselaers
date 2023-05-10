@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('image');
             $table->text('manual')->nullable();
             $table->text('comments')->nullable();
-            $table->string('lendingStatus');
         });
     }
 

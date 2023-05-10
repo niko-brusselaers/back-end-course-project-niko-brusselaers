@@ -14,7 +14,6 @@ class Item extends Model
         'image',
         'manual',
         'comments',
-        'lendingStatus'
     ];
     public function getItems(){
 

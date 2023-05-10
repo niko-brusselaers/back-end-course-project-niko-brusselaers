@@ -16,12 +16,13 @@ class ItemFactory extends Factory
      */
     public function definition(): array
     {
+        $width = random_int(200,600);
+        $height = random_int(200,600);
         return [
-            'name' => fake()->name(),
-            'image'=> fake()->image(),
-            'manual'=> fake()->text(),
-            'comments' => fake()->text,
-            'lendingStatus' => 'available'
+            'name' => fake()->word(),
+            'image'=> "https://picsum.photos/$width/$height",
+            'manual'=> fake()->text(maxNbChars: 300),
+            'comments' => fake()->text(maxNbChars: 300),
         ];
     }
 }

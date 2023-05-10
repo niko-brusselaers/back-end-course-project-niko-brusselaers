@@ -19,8 +19,8 @@ class UserFactory extends Factory
     {
         $roles = ['admin','lendingService', 'lender'];
         return [
-            'first_name' => fake()->name,
-            'last_name' => fake()->name,
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
             'userType' => "testUser",
             'role' => $roles[array_rand($roles)],
             'email' => fake()->email(),

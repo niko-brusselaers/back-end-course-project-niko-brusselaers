@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->date('start_date');
             $table->date('end_date');
-            $table->foreignId('item_id')->constrained();
-            $table->foreignId('user_id')->constrained();
+            $table->foreignId('item_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->text('comment')->nullable();
         });
     }

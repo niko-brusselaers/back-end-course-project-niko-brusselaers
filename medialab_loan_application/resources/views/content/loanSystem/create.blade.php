@@ -1,7 +1,6 @@
 @extends('layouts.loanSystem')
 
 @section('content')
-
     <div class="d-flex justify-content-center container-fluid" >
         <form action="{{route("loanSystem.create")}}"
               method="post" enctype="multipart/form-data"

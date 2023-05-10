@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use \Illuminate\Validation\ValidationException;
 
 class LoanSystemController extends Controller
 {
@@ -25,7 +25,17 @@ class LoanSystemController extends Controller
     }
 
     public function create(){
-        return view('content.loanSystem.create');
+        $users = DB::Table('users')
+                        ->select('first_name','last_name','email')
+                        ->get();
+        $loans = DB::table('loans')
+                    ->pluck('item_id');
+        $items = Item::all()
+                        ->except($loans->all())
+                        ->pluck('name');
+        $data = ['users' => $users, "items" => $items];
+
+        return view('content.loanSystem.create', $data);
     }
 
     public function CreateLoan(Request $request){
@@ -37,20 +47,18 @@ class LoanSystemController extends Controller
             'comment' => 'max:500'
         ]);
 
-
         $item = DB::table('items')
                     ->where('name','=', $request->input('itemName'))
                     ->get();
         $user = DB::table('users')
                 ->where('email','=', $request->input('email'))
                 ->get();
-
         if ($item->isEmpty()){
             return redirect()->back()->withErrors(['item'=> 'item does not exist']);
         } elseif ($item[0]->isLending =! 'available'){
             return redirect()->back()->withErrors(['item' => 'item is lent out']);
         } elseif ($user->isEmpty()){
-            return redirect()->back()->withErrors(['user' => 'item is lent out']);
+            return redirect()->back()->withErrors(['user' => 'user does not exist']);
         }
 
         $loan = new Loan([

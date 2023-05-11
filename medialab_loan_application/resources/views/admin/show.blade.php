@@ -3,7 +3,7 @@
 @section('content')
     <div class="card m-3 p-3 d-flex justify-content-between align-content-center" style=" min-height: 40vh; width: 40vw" >
         <h2 class="card-title" >Name: <br>
-            {{$user->first_name." ".$user->last_name}}</h2>
+            {{$user->name}}</h2>
         <h3 class="card-subtitle text-muted">User type: <br>
             {{$user->userType}}</h3>
         <h3 class="card-text">Role: <br>

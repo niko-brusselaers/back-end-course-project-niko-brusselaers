@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             $user->save();
         }
         */
-        User::factory(20)->create();
+        User::factory(100)->create();
 
     }
 }

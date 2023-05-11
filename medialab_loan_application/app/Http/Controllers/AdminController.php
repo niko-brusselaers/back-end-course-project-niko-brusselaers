@@ -8,24 +8,36 @@ use Nette\Schema\ValidationException;
 
 class adminController extends Controller
 {
-    public function getIndex(){
-        $user = new User();
-        $users = $user->getUsers();
-        return view('admin.index', ['users' => $users]);
+    public function index(Request $request){
+        $users = User::all();
+        if ($request->input('searchfield') != null){
+            $users = $users->where('name', 'LIKE', $request->input('searchfield'));
+        }
+
+        if ($request->input('userType') != null ){
+            if ($request->input('userType') != "all"){
+                $users = $users->where('userType', 'LIKE', $request->input('userType'));
+            }
+
+        }
+
+        return view('admin.index', ['users' => $users->all()]);
     }
 
-    public function getUser(Request $request){
+
+
+    public function show(Request $request){
         $user = user::find($request->input('userId'));
-        return view('admin.getuser', ['user' => $user]);
+        return view('admin.show', ['user' => $user]);
     }
 
-    public function createUser(){
-        return view('admin.createUser');
+    public function create(){
+        return view('admin.create');
     }
 
-    public function EditUser(Request $request){
+    public function edit(Request $request){
         $user = User::find($request->userId);
-        return view('admin.editUser', ['user' => $user]);
+        return view('admin.edit', ['user' => $user]);
 
     }
 
@@ -44,8 +56,7 @@ class adminController extends Controller
         if ($request->input('password') == $request->input('confirmPassword')){
 
              $user = new User([
-                'first_name'=> $request->input('first_name'),
-                'last_name' => $request->input('last_name'),
+                'name'=> $request->input('first_name').' '.$request->input('last_name'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
                 'role' => $request->input('role'),
@@ -54,7 +65,7 @@ class adminController extends Controller
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
             $user->save();
-            return redirect()->action([adminController::class, 'getIndex']);
+            return redirect()->action([adminController::class, 'index']);
         } else{
             throw \Illuminate\Validation\ValidationException::withMessages(['password' => 'passwords do not match']);
         }
@@ -81,13 +92,13 @@ class adminController extends Controller
         $user->email = $request->input('email');
 
         $user->save();
-        return redirect()->action([adminController::class, 'getIndex']);
+        return redirect()->action([adminController::class, 'index']);
     }
 
     public function deleteUser(Request $request){
         $user = User::find($request->userId);
         $user->delete();
-        return redirect()->action([adminController::class, 'getIndex']);
+        return redirect()->action([adminController::class, 'index']);
     }
 
 

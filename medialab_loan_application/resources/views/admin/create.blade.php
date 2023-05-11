@@ -1,29 +1,21 @@
 @extends('layouts.admin')
 
-@php
-    $roles = ['lender','admin','lendingService'];
-    $userTypes = ['student','staff','professor', 'testUser'];
-@endphp
-
 @section('content')
 
-
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("admin.updateUser")}}"
+        <form action="{{route("admin.saveUser")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">
                 <div class="col">
                     <label for="first_name" class="form-label">First name:</label>
                     <input type="text"  name="first_name" id="first_name"
-                           value="{{$user->first_name}}"
                            placeholder="First name" required
                            class="form-control" >
                 </div>
                 <div class="col">
                     <label for="last_name" class="form-label">Last name:</label>
                     <input type="text"  name="last_name" id="last_name"
-                           value="{{$user->last_name}}"
                            placeholder="Last name" required
                            class="form-control" >
                 </div>
@@ -31,7 +23,6 @@
             <div class="row mt-5">
                 <label for="email" class="form-label">Email</label>
                 <input type="email"  name="email" id="email"
-                       value="{{$user->email}}"
                        placeholder="Email" required
                        class="form-control" >
             </div>
@@ -41,13 +32,10 @@
                 <select name="userType" id="userType"
                         class="form-select"
                 >
-                    @foreach($userTypes as $userType)
-                        @if($userType == $user->userType)
-                            <option value="{{$userType}}" selected>{{$userType}}</option>
-                        @else
-                            <option value="{{$userType}}">{{$userType}}</option>
-                        @endif
-                    @endforeach
+                    <option value="" selected hidden >please select the the type of user</option>
+                    <option value="student">student</option>
+                    <option value="staff">staff</option>
+                    <option value="teacher">teacher</option>
 
                 </select>
             </div>
@@ -57,18 +45,28 @@
                 <select name="role" id="role"
                         class="form-select"
                 >
-                    @foreach($roles as $role)
-                        @if($role == $user->role)
-                            <option value="{{$role}}" selected>{{$role}}</option>
-                        @else
-                            <option value="{{$role}}">{{$role}}</option>
-                        @endif
-                    @endforeach
+                    <option value="" selected hidden k>please select a role</option>
+                    <option value="lender">lender</option>
+                    <option value="admin">admin</option>
+                    <option value="lendingService">lendingService</option>
                 </select>
             </div>
 
+            <div class="row mt-5">
+                <div class="col">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password"  name="password" id="password"
+                           placeholder="pasword" required
+                           class="form-control" >
+                </div>
+                <div class="col">
+                    <label for="confirmPasword" class="form-label">Confirm password</label>
+                    <input type="password"  name="confirmPassword" id="confirmPassword"
+                           placeholder="confirm password" required
+                           class="form-control" >
+                </div>
+            </div>
 
-            <input type="text" name="id" id="id" value="{{$user->id}}" hidden="true">
 
 
             <div class="d-flex justify-content-between container-fluid mt-3">

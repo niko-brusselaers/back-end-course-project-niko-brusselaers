@@ -10,12 +10,15 @@ use Illuminate\Support\Facades\DB;
 class LoanSystemController extends Controller
 {
     //
-    public function index(){
+    public function index(Request $request){
         $loans = Loan::all();
+        if ($request->input('searchfield' != null)){
+        }
+
         return view('content.loanSystem.index', ['loans' => $loans]);
     }
 
-    public function get(Request $request){
+    public function show(Request $request){
         $loan = Loan::find($request->input('loanId'));
         return view('content.loanSystem.get', ['loan' => $loan]);
     }

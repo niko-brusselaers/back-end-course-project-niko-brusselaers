@@ -49,7 +49,7 @@ Route::prefix('admin')->group(function (){
 
 Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(function (){
     Route::get('', "index")->name("loanSystem.index");
-    Route::get('loan', "get")->name('loanSystem.get');
+    Route::get('loan', "show")->name('loanSystem.show');
     Route::get('create', "create")->name('loanSystem.create');
     Route::get('edit', "edit")->name('loanSystem.edit');
 

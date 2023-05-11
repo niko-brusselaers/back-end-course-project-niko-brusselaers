@@ -36,14 +36,14 @@
                     <label for="startDate"
                            class="form-label">Start date:</label>
                     <input type="date"  name="startDate" id="startDate" min="{{date('Y-m-d')}}" value="{{date('Y-m-d')}}"
-                           placeholder="name of product" required
+                            required
                            class="form-control" >
                 </div>
                 <div class="col">
                     <label for="endDate"
                            class="form-label">End date:</label>
                     <input type="date"  name="endDate" id="endDate" min="{{date('Y-m-d')}}"
-                           placeholder="name of product" required
+                           required
                            class="form-control" >
                 </div>
             </div>

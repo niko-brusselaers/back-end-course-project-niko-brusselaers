@@ -35,9 +35,9 @@ Route::prefix('inventoryManagement')->group(function (){
 
 Route::prefix('admin')->group(function (){
     Route::get('', [AdminController::class, "index"]) ->name("admin.index");
-    Route::get('user',[AdminController::class , "show"])->name('admin.getUser');
-    Route::get('create', [AdminController::class , "create"])->name('admin.createUser');
-    Route::get('edit', [AdminController::class , "edit" ])->name('admin.editUser');
+    Route::get('user',[AdminController::class , "show"])->name('admin.show');
+    Route::get('create', [AdminController::class , "create"])->name('admin.create');
+    Route::get('edit', [AdminController::class , "edit" ])->name('admin.edit');
 
     Route::post('saveUser', [AdminController::class, "saveUser"])->name('admin.saveUser');
     Route::post('editUser', [AdminController::class, "updateUser"])->name('admin.updateUser');

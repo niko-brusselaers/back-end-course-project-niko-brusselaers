@@ -15,7 +15,7 @@
                 <option value="teacher">teacher</option>
             </select>
             <button type="submit" class="btn btn-primary " style="width: 5em">search</button>
-            <a href="{{route("admin.createUser")}}" class="btn btn-info mx-2" style="width: 10em">create User</a>
+            <a href="{{route("admin.create")}}" class="btn btn-info mx-2" style="width: 10em">create User</a>
 
         </div>
     </form>
@@ -27,7 +27,7 @@
                     <h2 class="card-title" >{{$user->name}}</h2>
                     <h3 class="card-subtitle text-muted">{{$user->userType}}</h3>
                     <h4 class="card-text">{{$user->email}}</h4>
-                    <a class="btn btn-primary" href={{route("admin.getUser", ['userId' => $user->id])}}>see more details</a>
+                    <a class="btn btn-primary" href={{route("admin.show", ['userId' => $user->id])}}>see more details</a>
                 </div>
             @endforeach
         @else

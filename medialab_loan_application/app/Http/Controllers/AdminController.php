@@ -13,7 +13,6 @@ class adminController extends Controller
         if ($request->input('searchfield') != null){
             $users = $users->where('name', 'LIKE', $request->input('searchfield'));
         }
-
         if ($request->input('userType') != null ){
             if ($request->input('userType') != "all"){
                 $users = $users->where('userType', 'LIKE', $request->input('userType'));

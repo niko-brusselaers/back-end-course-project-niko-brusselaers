@@ -18,10 +18,10 @@ class UserFactory extends Factory
     public function definition(): array
     {
         $roles = ['admin','lendingService', 'lender'];
+        $userType =['staff', 'teacher', 'student'];
         return [
-            'first_name' => fake()->name,
-            'last_name' => fake()->name,
-            'userType' => "testUser",
+            'name' => fake()->name,
+            'userType' => $userType[array_rand($userType)],
             'role' => $roles[array_rand($roles)],
             'email' => fake()->email(),
             'password' => bcrypt('password'),

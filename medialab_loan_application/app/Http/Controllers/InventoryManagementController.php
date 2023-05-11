@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
+use App\Models\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -10,23 +11,32 @@ class inventoryManagementController extends Controller
 {
     //
 
-    function getIndex(){
-        $item = new item();
-        $items = $item->getItems();
-        return view("content.inventoryManagement.index", ['items' => $items]);
+    public function index(Request $request){
+        $items = Item::all();
+        if ($request->input('searchfield') != null){
+            $items = $items->where('name', 'LIKE', $request->input('searchfield'));
+        }
+
+        if ($request->input('isAvailable') != null){
+            $loan_items = Loan::all()->pluck('item_id');
+            foreach ($loan_items->all() as $item_id){
+                $items = $items->where('id', '!=', $item_id);
+            }
+        }
+        return view("content.inventoryManagement.index", ['items' => $items->all()]);
     }
 
-    function createView(){
+    function create(){
         return view('content.inventoryManagement.create');
     }
 
-    function editView(Request $request){
+    public function edit(Request $request){
         $item = new Item;
         $item = $item->getItem($request['itemId']);
         return view('content.inventoryManagement.edit', ['item' => $item]);
     }
 
-    function getItem(Request $request){
+    public function show(Request $request){
         $item = new Item;
         $item = $item->getItem($request['itemId']);
         return view('content.inventoryManagement.itemDetails', ['item' => $item]);
@@ -34,7 +44,7 @@ class inventoryManagementController extends Controller
 
 
 
-    function saveItem(Request $request){
+    public function saveItem(Request $request){
 
         $request->validate([
             "name"=> "required|min:5|max:60",
@@ -65,7 +75,7 @@ class inventoryManagementController extends Controller
         return redirect()->action([inventoryManagementController::class, 'getIndex']);
     }
 
-    function editItem(Request $request){
+    public function editItem(Request $request){
         $request->validate([
             "name"=> "required|min:5|max:60",
             "image"=>"image",
@@ -94,9 +104,6 @@ class inventoryManagementController extends Controller
 
     }
 
-    function updateItem(){
-
-    }
     function deleteItem(Request $request){
         $item = new Item();
         $item->deleteItem($request->input('itemId'));

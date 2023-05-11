@@ -31,7 +31,10 @@
                 </div>
             @endforeach
         @else
-            <h1 class="">there are no users</h1>
+            <div class="d-flex flex-column justify-center">
+                <h1 class="">there are no users</h1>
+                <a class="btn btn-primary " href="{{route('admin.create')}}">create new</a>
+            </div>
 
     @endif
 

@@ -4,7 +4,7 @@
     <div class="d-flex justify-content-center align-items-center" style="height: 92vh">
         <div class="d-flex flex-row shadow border rounded p-2">
             <img src="{{$item->image}}" alt="" class="" style="width: 50em">
-            <div class=" d-flex flex-column justify-content ms-5 " style="height: 50em">
+            <div class=" d-flex flex-column justify-content ms-5 " style="height: 70%">
                 <h1 class="mt-3">{{$item->name}}</h1>
                 <h3 class="pt-5">lending status: {{$item->lendingStatus}}</h3>
                 <div class="pt-5">

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -17,18 +18,19 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        $roles = ['admin','lendingService', 'lender'];
+
         $userType =['staff', 'teacher', 'student'];
-        return [
+         return[
             'name' => fake()->name,
             'userType' => $userType[array_rand($userType)],
-            'role' => $roles[array_rand($roles)],
             'email' => fake()->email(),
             'password' => bcrypt('password'),
             'remember_token' => Str::random(10),
             'updated_at' => date('Y-m-d H:i:s'),
             'created_at' => date('Y-m-d H:i:s')
         ];
+
+
     }
 
     /**

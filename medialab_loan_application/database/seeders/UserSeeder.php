@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Spatie\Permission\Models\Role;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -14,8 +15,11 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-        
-        User::factory(100)->create();
 
+        $users = User::factory(100)->create();
+        foreach ($users as $user){
+            $roles = ['admin','lendingService', 'user'];
+            $user->assignRole($roles[array_rand($roles)]);
+        }
     }
 }

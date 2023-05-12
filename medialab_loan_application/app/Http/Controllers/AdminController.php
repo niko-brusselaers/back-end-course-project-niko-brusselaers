@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
 
 class AdminController extends Controller
 {
+
     public function index(Request $request){
+        $user = auth()->user();
+        dd($user);
         $users = User::all();
         if ($request->input('searchfield') != null){
             $users = $users->where('name', 'LIKE', $request->input('searchfield'));

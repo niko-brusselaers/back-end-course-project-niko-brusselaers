@@ -7,7 +7,7 @@ use App\Models\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class inventoryManagementController extends Controller
+class InventoryManagementController extends Controller
 {
     //
 

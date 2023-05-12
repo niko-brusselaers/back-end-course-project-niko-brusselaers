@@ -1,26 +1,21 @@
+
 <?php
 
 use App\Http\Controllers\inventoryManagementController;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\LoanSystemController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
-Route::prefix('inventoryManagement')->group(function (){
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::prefix('inventoryManagement')->middleware(['auth'])->group(function (){
     Route::get('', [InventoryManagementController::class, "index"])->name("inventoryManagement.index");
     Route::get('create',[InventoryManagementController::class, "create"])->name("inventoryManagement.create");
     Route::get('item', [InventoryManagementController::class, "show"])->name("inventoryManagement.show");
@@ -33,18 +28,16 @@ Route::prefix('inventoryManagement')->group(function (){
     Route::get('deleteItem',[InventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
 });
 
-Route::prefix('admin')->group(function (){
-    Route::get('', [AdminController::class, "index"]) ->name("admin.index");
-    Route::get('user',[AdminController::class , "show"])->name('admin.show');
-    Route::get('create', [AdminController::class , "create"])->name('admin.create');
-    Route::get('edit', [AdminController::class , "edit" ])->name('admin.edit');
+Route::prefix('admin')->middleware(['auth'])->group(function () {
+    Route::get('', [AdminController::class, "index"])->name("admin.index");
+    Route::get('user', [AdminController::class, "show"])->name('admin.show');
+    Route::get('create', [AdminController::class, "create"])->name('admin.create');
+    Route::get('edit', [AdminController::class, "edit"])->name('admin.edit');
 
     Route::post('saveUser', [AdminController::class, "saveUser"])->name('admin.saveUser');
     Route::post('editUser', [AdminController::class, "updateUser"])->name('admin.updateUser');
 
     Route::get('deleteUser', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
-
-
 });
 
 Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(function (){
@@ -59,3 +52,15 @@ Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(func
 
     Route::get('delete',  "delete")->name("loanSystem.delete");
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';

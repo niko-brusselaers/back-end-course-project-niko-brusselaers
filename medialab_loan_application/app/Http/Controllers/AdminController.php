@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Nette\Schema\ValidationException;
 
-class adminController extends Controller
+class AdminController extends Controller
 {
     public function index(Request $request){
         $users = User::all();

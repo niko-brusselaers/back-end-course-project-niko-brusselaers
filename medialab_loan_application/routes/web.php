@@ -1,8 +1,8 @@
 
 <?php
 
-use App\Http\Controllers\inventoryManagementController;
-use App\Http\Controllers\adminController;
+use App\Http\Controllers\InventoryManagementController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoanSystemController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -29,35 +29,35 @@ Route::prefix('inventoryManagement')->middleware(['auth'])->group(function (){
         ->middleware(['can:edit item'])
         ->name("inventoryManagement.edit");
 
-    Route::post('saveItem',[InventoryManagementController::class, "saveItem"])
+    Route::post('save',[InventoryManagementController::class, "save"])
         ->middleware(['can:view inventoryManagementIndex'])
-        ->name("inventoryManagement.saveItem");
-    Route::post('editItem',[InventoryManagementController::class, "editItem"])
+        ->name("inventoryManagement.save");
+    Route::post('update',[InventoryManagementController::class, "update"])
         ->middleware(['can:edit item'])
-        ->name("inventoryManagement.editItem");
+        ->name("inventoryManagement.update");
 
 
-    Route::get('deleteItem',[InventoryManagementController::class, "deleteItem"])->name('inventoryManagement.deleteItem');
+    Route::get('deleteItem',[InventoryManagementController::class, "delete"])->name('inventoryManagement.delete');
 });
 
-Route::prefix('admin')->middleware(['auth'])->group(function () {
-    Route::get('', [AdminController::class, "index"])
+Route::prefix('admin')->controller(AdminController::class)->middleware(['auth'])->group(function () {
+    Route::get('', "index")
         ->middleware(['can:view adminIndex'])
         ->name("admin.index");
-    Route::get('user', [AdminController::class, "show"])
+    Route::get('user',  "show")
         ->middleware(['can:view users'])
         ->name('admin.show');
-    Route::get('create', [AdminController::class, "create"])
+    Route::get('create',  "create")
         ->middleware(['can:create users'])
         ->name('admin.create');
-    Route::get('edit', [AdminController::class, "edit"])
+    Route::get('edit', "edit")
         ->middleware(['can:edit users'])
         ->name('admin.edit');
 
-    Route::post('saveUser', [AdminController::class, "saveUser"])->name('admin.saveUser');
-    Route::post('editUser', [AdminController::class, "updateUser"])->name('admin.updateUser');
+    Route::post('save', "save")->name('admin.save');
+    Route::post('update', "update")->name('admin.update');
 
-    Route::get('deleteUser', [AdminController::class, 'deleteUser'])->name('admin.deleteUser');
+    Route::get('delete', 'delete')->name('admin.delete');
 });
 
 Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(function (){
@@ -74,10 +74,10 @@ Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(func
         ->middleware(['can:edit item'])
         ->name('loanSystem.edit');
 
-    Route::post('create', "createLoan")
+    Route::post('save', "save")
         ->middleware(['can:create item'])
         ->name('loanSystem.create');
-    Route::post('edit', "editLoan")
+    Route::post('update', "update")
         ->middleware(['can:edit item'])
         ->name('loanSystem.edit');
 

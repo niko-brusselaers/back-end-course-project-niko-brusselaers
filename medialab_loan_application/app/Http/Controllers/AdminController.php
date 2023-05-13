@@ -11,8 +11,6 @@ class AdminController extends Controller
 {
 
     public function index(Request $request){
-        $user = auth()->user();
-        dd($user);
         $users = User::all();
         if ($request->input('searchfield') != null){
             $users = $users->where('name', 'LIKE', $request->input('searchfield'));
@@ -44,11 +42,11 @@ class AdminController extends Controller
 
     }
 
-    public function saveUser(Request $request){
+    public function save(Request $request){
 
         $request->validate([
             'first_name'=> "required",
-            'last_name' => "required",
+            'last_name'=> "required",
             'userType' => 'required',
             'role' => 'required',
             'email' => "required",
@@ -62,25 +60,26 @@ class AdminController extends Controller
                 'name'=> $request->input('first_name').' '.$request->input('last_name'),
                 'email' => $request->input('email'),
                 'password' => bcrypt($request->input('password')),
-                'role' => $request->input('role'),
                 'userType' => $request->input('userType'),
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s')
             ]);
+
+             $user->assignRole($request->input('role'));
+
             $user->save();
-            return redirect()->action([adminController::class, 'index']);
+            return redirect()->action([AdminController::class, 'index']);
         } else{
             throw \Illuminate\Validation\ValidationException::withMessages(['password' => 'passwords do not match']);
         }
 
     }
 
-    public function updateUser(Request $request){
+    public function update(Request $request){
 
         $request->validate([
             'id' => 'required',
-            'first_name'=> "required",
-            'last_name' => "required",
+            'name'=> "required",
             'userType' => 'required',
             'role' => 'required',
             'email' => "required",
@@ -88,20 +87,20 @@ class AdminController extends Controller
 
         $user = User::find($request->input('id'));
 
-        $user->first_name = $request->input('first_name');
-        $user->last_name = $request->input('last_name');
+        $user->name = $request->input('name');
         $user->userType = $request->input('userType');
-        $user->role = $request->input('role');
         $user->email = $request->input('email');
 
+        $user->assignRole($request->input('role'));
+
         $user->save();
-        return redirect()->action([adminController::class, 'index']);
+        return redirect()->action([AdminController::class, 'index']);
     }
 
-    public function deleteUser(Request $request){
+    public function delete(Request $request){
         $user = User::find($request->userId);
         $user->delete();
-        return redirect()->action([adminController::class, 'index']);
+        return redirect()->action([AdminController::class, 'index']);
     }
 
 

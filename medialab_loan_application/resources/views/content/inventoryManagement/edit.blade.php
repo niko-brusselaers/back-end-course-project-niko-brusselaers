@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("inventoryManagement.editItem")}}"
+        <form action="{{route("inventoryManagement.update")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">

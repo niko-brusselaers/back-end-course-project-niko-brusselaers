@@ -39,12 +39,12 @@ class InventoryManagementController extends Controller
     public function show(Request $request){
         $item = new Item;
         $item = $item->getItem($request['itemId']);
-        return view('content.inventoryManagement.itemDetails', ['item' => $item]);
+        return view('content.inventoryManagement.show', ['item' => $item]);
     }
 
 
 
-    public function saveItem(Request $request){
+    public function save(Request $request){
 
         $request->validate([
             "name"=> "required|min:5|max:60",
@@ -72,10 +72,10 @@ class InventoryManagementController extends Controller
 
         $item->save();
 
-        return redirect()->action([inventoryManagementController::class, 'getIndex']);
+        return redirect()->action([InventoryManagementController::class, 'index']);
     }
 
-    public function editItem(Request $request){
+    public function update(Request $request){
         $request->validate([
             "name"=> "required|min:5|max:60",
             "image"=>"image",
@@ -100,13 +100,13 @@ class InventoryManagementController extends Controller
 
         $item->save();
 
-        return redirect()->action([inventoryManagementController::class, 'getIndex']);
+        return redirect()->action([InventoryManagementController::class, 'index']);
 
     }
 
-    function deleteItem(Request $request){
+    function delete(Request $request){
         $item = new Item();
         $item->deleteItem($request->input('itemId'));
-        return redirect()->action([inventoryManagementController::class, 'getIndex']);
+        return redirect()->action([InventoryManagementController::class, 'index']);
     }
 }

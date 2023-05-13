@@ -20,7 +20,7 @@ class LoanSystemController extends Controller
 
     public function show(Request $request){
         $loan = Loan::find($request->input('loanId'));
-        return view('content.loanSystem.get', ['loan' => $loan]);
+        return view('content.loanSystem.show', ['loan' => $loan]);
     }
     public function edit(Request $request){
         $loan = Loan::find($request->input('loanId'));
@@ -29,7 +29,7 @@ class LoanSystemController extends Controller
 
     public function create(){
         $users = DB::Table('users')
-                        ->select('first_name','last_name','email')
+                        ->select('name','email')
                         ->get();
         $items = Item::all()->pluck('name');
         $data = ['users' => $users, "items" => $items];
@@ -37,7 +37,7 @@ class LoanSystemController extends Controller
         return view('content.loanSystem.create', $data);
     }
 
-    public function CreateLoan(Request $request){
+    public function save(Request $request){
         $request->validate([
             'itemName' => 'required',
             'email'=> 'required',
@@ -92,7 +92,7 @@ class LoanSystemController extends Controller
         return redirect()->action([LoanSystemController::class, "index"]);
     }
 
-    public function editLoan(Request $request){
+    public function update(Request $request){
         $request->validate([
             'id' => 'required',
             'endDate' => 'required',

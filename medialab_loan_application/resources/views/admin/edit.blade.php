@@ -1,21 +1,21 @@
 @extends('layouts.admin')
 
 @php
-    $roles = ['lender','admin','lendingService'];
-    $userTypes = ['student','staff','professor', 'testUser'];
+    $roles = ['user','admin','lendingService'];
+    $userTypes = ['student','staff','professor'];
 @endphp
 
 @section('content')
 
 
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("admin.updateUser")}}"
+        <form action="{{route("admin.update")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">
                 <div class="col">
-                    <label for="first_name" class="form-label">name:</label>
-                    <input type="text"  name="first_name" id="first_name"
+                    <label for="name" class="form-label">name:</label>
+                    <input type="text"  name="name" id="name"
                            value="{{$user->name}}"
                            placeholder="name" required
                            class="form-control" >

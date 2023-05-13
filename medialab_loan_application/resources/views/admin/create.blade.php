@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("admin.saveUser")}}"
+        <form action="{{route("admin.save")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">
@@ -35,7 +35,7 @@
                     <option value="" selected hidden >please select the the type of user</option>
                     <option value="student">student</option>
                     <option value="staff">staff</option>
-                    <option value="teacher">teacher</option>
+                    <option value="teacher">admin</option>
 
                 </select>
             </div>
@@ -46,7 +46,7 @@
                         class="form-select"
                 >
                     <option value="" selected hidden k>please select a role</option>
-                    <option value="lender">lender</option>
+                    <option value="user">user</option>
                     <option value="admin">admin</option>
                     <option value="lendingService">lendingService</option>
                 </select>

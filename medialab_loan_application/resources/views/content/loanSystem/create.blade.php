@@ -24,7 +24,7 @@
                             placeholder="please enter user">
                     <datalist id="userList" >
                         @foreach($users as $user)
-                            <option value="{{$user->email}}">{{$user->first_name.' '.$user->last_name}}</option>
+                            <option value="{{$user->email}}">{{$user->name}}</option>
                         @endforeach
                     </datalist>
                 </div>

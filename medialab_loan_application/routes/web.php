@@ -76,10 +76,10 @@ Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(func
 
     Route::post('save', "save")
         ->middleware(['can:create item'])
-        ->name('loanSystem.create');
+        ->name('loanSystem.save');
     Route::post('update', "update")
         ->middleware(['can:edit item'])
-        ->name('loanSystem.edit');
+        ->name('loanSystem.update');
 
 
     Route::get('delete',  "delete")->name("loanSystem.delete");

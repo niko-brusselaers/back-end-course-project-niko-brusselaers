@@ -6,7 +6,7 @@
     $currentDate = date('Y-m-d')
     ?>
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("loanSystem.edit")}}"
+        <form action="{{route("loanSystem.update")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">

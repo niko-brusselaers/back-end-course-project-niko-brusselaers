@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="d-flex justify-content-center container-fluid" >
-        <form action="{{route("loanSystem.create")}}"
+        <form action="{{route("loanSystem.save")}}"
               method="post" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">

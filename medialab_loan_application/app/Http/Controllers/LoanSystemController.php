@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Loan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isEmpty;
 
 class LoanSystemController extends Controller
 {
@@ -75,26 +76,25 @@ class LoanSystemController extends Controller
                     ->where('name','=', $request->input('itemName'))
                     ->get()
                     ->first();
-        $item = $item->all();
 
         //get selected user details
         $user = DB::table('users')
                 ->where('email','=', $request->input('email'))
-                ->get();
-
+                ->get()
+                ->first();
         //if no item could be found throw back error
-        if (!count($item)){
+        if (empty($item)){
             return redirect()->back()->withErrors(['item'=> 'item does not exist']);
         }
 
         //if no user could be found throw back error
-        if (!count($user)){
+        if (empty($user)){
             return redirect()->back()->withErrors(['user' => 'user does not exist']);
         }
 
         //check if item doesnt already have any loans
         $itemLoans = DB::table('loans')
-                        ->where('item_id', '=',$item[0]->id )
+                        ->where('item_id', '=',$item->id )
                         ->get();
         //if item already has a loan, check if it is available during the selected time
         if ($itemLoans->isNotEmpty()){
@@ -115,8 +115,8 @@ class LoanSystemController extends Controller
 
         //create a new loan with details from form
         $loan = new Loan([
-            'item_id' => $item[0]->id,
-            'user_id' => $user[0]->id,
+            'item_id' => $item->id,
+            'user_id' => $user->id,
             'comment' => $request->all()['comment'],
             'start_date'=> $request->input('startDate'),
             'end_date' => $request->input('endDate'),

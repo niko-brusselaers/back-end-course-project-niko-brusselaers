@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-center container-fluid" >
         <form action="{{route("inventoryManagement.save")}}"
-              method="post" enctype="multipart/form-data"
+              method="POST" enctype="multipart/form-data"
               class="p-5">
             <div class="row mt-5">
                 <div class="col">

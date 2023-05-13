@@ -15,9 +15,10 @@ class UserSeeder extends Seeder
 
     public function run(): void
     {
-
+        //create x amount of users and store in database
         $users = User::factory(100)->create();
         foreach ($users as $user){
+            //assign role to every user
             $roles = ['admin','lendingService', 'user'];
             $user->assignRole($roles[array_rand($roles)]);
         }

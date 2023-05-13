@@ -56,12 +56,12 @@
                 <div class="col">
                     <label for="password" class="form-label">Password</label>
                     <input type="password"  name="password" id="password"
-                           placeholder="pasword" required
+                           placeholder="password" required
                            class="form-control" >
                 </div>
                 <div class="col">
-                    <label for="confirmPasword" class="form-label">Confirm password</label>
-                    <input type="password"  name="confirmPassword" id="confirmPassword"
+                    <label for="password_confirmation" class="form-label">Confirm password</label>
+                    <input type="password"  name="password_confirmation" id="password_confirmation"
                            placeholder="confirm password" required
                            class="form-control" >
                 </div>

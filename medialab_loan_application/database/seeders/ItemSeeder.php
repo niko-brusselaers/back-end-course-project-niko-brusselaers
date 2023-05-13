@@ -13,6 +13,7 @@ class ItemSeeder extends Seeder
      */
     public function run(): void
     {
+        //create x amount of items and store in database
         Item::factory(50)->create();
     }
 }

@@ -14,8 +14,28 @@ class LoanSystemController extends Controller
      * display index of loans system, containing a list of loans
      */
     public function index(Request $request){
-        $loans = Loan::all();
-        if ($request->input('searchfield' != null)){
+
+        //get all loans and retrieve item.name,item.image, user.name, from foreign tables
+        $loans = DB::table('loans')
+                    ->join('items', 'loans.item_id', '=', 'items.id')
+                    ->join('users','loans.user_id', '=', 'users.id')
+                    ->select('items.name as item_name', 'items.image','users.name as user_name', 'loans.id','loans.start_date','loans.end_date')
+                    ->get();
+
+        //if searchfield is filled, filter list of loans where loan name partly matches searchfield input
+        if ($request->input('searchfield') != null){
+            
+            $loans = $loans->where('item_name', 'like', $request->input('searchfield'));
+        }
+
+        //if startDate is filled, get all loans where loan start_date is after form startDate
+        if ($request->input('startDate')!=null){
+            $loans = $loans->where('start_date', '>=', $request->input('startDate'));
+        }
+
+        //if endDate is filled, get all loans where loan end_date is before form endDate
+        if ($request->input('endDate')!=null){
+            $loans = $loans->where('end_date', '<=', $request->input('endDate'));
         }
 
         //return index page of loan system
@@ -92,7 +112,7 @@ class LoanSystemController extends Controller
             return redirect()->back()->withErrors(['user' => 'user does not exist']);
         }
 
-        //check if item doesnt already have any loans
+        //check if item doesn't already have any loans
         $itemLoans = DB::table('loans')
                         ->where('item_id', '=',$item->id )
                         ->get();

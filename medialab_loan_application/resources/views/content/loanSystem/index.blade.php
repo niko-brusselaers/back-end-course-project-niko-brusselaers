@@ -1,7 +1,6 @@
 @extends('layouts.loanSystem')
 
 @section('content')
-
     <form action="{{route('loanSystem.index')}}" class="mt-5 mx-5">
         <div class="row mx-5">
             <input type="search"
@@ -26,9 +25,9 @@
         @if(count($loans) )
             @foreach($loans as $loan)
                 <div class="card m-3 p-3 d-flex justify-content-between align-content-center" style=" width: 20em;" >
-                    <h3 class="card-title" >{{$loan->item->name}}</h3>
-                    <img src="{{ asset($loan->item->image) }}" alt="{{$loan->item->image}}">
-                    <h4>lender:{{$loan->user->first_name}}</h4>
+                    <h3 class="card-title" >{{$loan->item_name}}</h3>
+                    <img src="{{ asset($loan->image) }}" alt="{{$loan->image}}">
+                    <h4>lender:{{$loan->user_name}}</h4>
                     <p>from {{$loan->start_date}} until {{$loan->end_date}}</p>
                     <a class="btn btn-primary" href={{route("loanSystem.show", ['loanId' => $loan->id])}}>see more details</a>
                 </div>

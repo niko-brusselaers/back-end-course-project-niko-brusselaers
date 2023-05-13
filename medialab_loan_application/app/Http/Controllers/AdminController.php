@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use \Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -12,10 +13,14 @@ class AdminController extends Controller
      * display admin index, containing a list of user
      */
     public function index(Request $request){
-        $users = User::all();
+
         //if user has typed something in searchField, filter all users containing value of input
         if ($request->input('searchfield') != null){
-            $users = $users->where('name', 'LIKE', $request->input('searchfield'));
+            $users = DB::Table('users')
+                ->where('name', 'LIKE', '%'.$request->input('searchfield').'%')
+                ->get();
+        } else{
+            $users = User::all();
         }
         //if user has selected a user type, filter all user and only show users having selected user type.
         if ($request->input('userType') != null ){

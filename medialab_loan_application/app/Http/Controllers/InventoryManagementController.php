@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Loan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class InventoryManagementController extends Controller
@@ -14,10 +15,13 @@ class InventoryManagementController extends Controller
      * display inventory management index, containing a list of items
      */
     public function index(Request $request){
-        $items = Item::all();
         //if user has typed something in searchField, filter all items containing value of input
         if ($request->input('searchfield') != null){
-            $items = $items->where('name', 'LIKE', $request->input('searchfield'));
+            $items = DB::table('items')
+                        ->where('name', 'LIKE', '%'.$request->input('searchfield').'%')
+                        ->get();
+        } else{
+            $items = Item::all();
         }
         //if user has selected is available checkbox, give all items that do not have a loan currently
         if ($request->input('isAvailable') != null){
@@ -26,7 +30,6 @@ class InventoryManagementController extends Controller
                 $items = $items->where('id', '!=', $item_id);
             }
         }
-
         //redirect to index page of inventory management
         return view("content.inventoryManagement.index", ['items' => $items->all()]);
     }

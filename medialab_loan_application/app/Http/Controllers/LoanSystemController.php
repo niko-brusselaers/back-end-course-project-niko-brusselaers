@@ -15,17 +15,22 @@ class LoanSystemController extends Controller
      */
     public function index(Request $request){
 
-        //get all loans and retrieve item.name,item.image, user.name, from foreign tables
-        $loans = DB::table('loans')
-                    ->join('items', 'loans.item_id', '=', 'items.id')
-                    ->join('users','loans.user_id', '=', 'users.id')
-                    ->select('items.name as item_name', 'items.image','users.name as user_name', 'loans.id','loans.start_date','loans.end_date')
-                    ->get();
+
 
         //if searchfield is filled, filter list of loans where loan name partly matches searchfield input
         if ($request->input('searchfield') != null){
-            
-            $loans = $loans->where('item_name', 'like', $request->input('searchfield'));
+            $loans = DB::table('loans')
+                ->join('items', 'loans.item_id', '=', 'items.id')
+                ->join('users','loans.user_id', '=', 'users.id')
+                ->select('items.name as item_name', 'items.image','users.name as user_name', 'loans.id','loans.start_date','loans.end_date')
+                ->where('items.name', 'like', '%'.$request->input('searchfield').'%')
+                ->get();
+        } else{
+            $loans = DB::table('loans')
+                ->join('items', 'loans.item_id', '=', 'items.id')
+                ->join('users','loans.user_id', '=', 'users.id')
+                ->select('items.name as item_name', 'items.image','users.name as user_name', 'loans.id','loans.start_date','loans.end_date')
+                ->get();
         }
 
         //if startDate is filled, get all loans where loan start_date is after form startDate

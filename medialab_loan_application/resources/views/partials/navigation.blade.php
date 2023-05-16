@@ -8,13 +8,29 @@
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
+
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        Dashboard
                     </x-nav-link>
+                    @can('view adminIndex')
+                        <x-nav-link :href="route('admin.index')" :active="request()->routeIs('admin')">
+                            Admin
+                        </x-nav-link>
+                    @endcan
+                    @can('view lendingServiceIndex')
+                        <x-nav-link :href="route('loanSystem.index')" :active="request()->routeIs('loanSystem')">
+                            Loan System
+                        </x-nav-link>
+                    @endcan
+                    @can('view inventoryManagementIndex')
+                        <x-nav-link :href="route('inventoryManagement.index')" :active="request()->routeIs('inventoryMangement')">
+                            Inventory Management
+                        </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

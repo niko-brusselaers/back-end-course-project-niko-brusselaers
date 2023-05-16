@@ -1,43 +1,46 @@
-@extends('layouts.admin')
+@extends('layouts.app')
 
 @section('content')
-    <form action="{{route('admin.index')}}" class="mt-5 mx-5">
-        <div class="row mx-5">
-            <input type="search"
-                   name="searchfield" id="searchfield"
-                   placeholder="search for items"
-                   class="form-control w-25 ">
-            <select name="userType" id="userType"
-                    class="form-select" style="width: 15em">
-                <option value="all">all</option>
-                <option value="student">student</option>
-                <option value="staff">staff</option>
-                <option value="teacher">teacher</option>
-            </select>
-            <button type="submit" class="btn btn-primary " style="width: 5em">search</button>
-            <a href="{{route("admin.create")}}" class="btn btn-info mx-2" style="width: 10em">create User</a>
+    <div  style="padding: 0 10vw">
+        <form action="{{route('admin.index')}}" class="mt-10 ">
+            <div class="row mx-5">
+                <input type="search"
+                       name="searchfield" id="searchfield"
+                       placeholder="search for users"
+                       class="form-control w-25 ">
+                <select name="userType" id="userType"
+                        class="form-select" style="width: 15em">
+                    <option value="all">all</option>
+                    <option value="student">student</option>
+                    <option value="staff">staff</option>
+                    <option value="teacher">teacher</option>
+                </select>
+                <button type="submit" class="bg-blue-600 rounded px-5 py-1.5 mx-1 text-lg font-bold text-white" >search</button>
+                <a href="{{route("admin.create")}}" class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white" >create User</a>
+
+            </div>
+        </form>
+        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-full" style="min-height: 75vh" >
+
+        @if(count($users) )
+                @foreach($users as $user)
+                    <div class="bg-slate-300 rounded m-3 p-3 flex flex-col justify-between content-center h-52" style=" width: 20em;" >
+                        <h2><b>Name:</b> {{$user->name}}</h2>
+                        <h3><b>Type:</b> {{$user->userType}}</h3>
+                        <h4><b>Email:</b> {{$user->email}}</h4>
+                        <a class="bg-blue-600 rounded-full px-5 py-1.5 mx-1 text-lg font-bold text-white text-center"
+                           href={{route("admin.show", ['userId' => $user->id])}}>see more details</a>
+                    </div>
+                @endforeach
+            @else
+                <div class="d-flex flex-column justify-center">
+                    <h1 class="">there are no users</h1>
+                    <a class="btn btn-primary " href="{{route('admin.create')}}">create new</a>
+                </div>
+
+        @endif
 
         </div>
-    </form>
-    <div class="d-flex flex-wrap rounded bg-light d-inline-block p-5 m-5 " style="min-height: 80vh; width: 97vw">
-
-    @if(count($users) )
-            @foreach($users as $user)
-                <div class="card m-3 p-3 d-flex justify-content-between align-content-center" style=" width: 20em;" >
-                    <h2 class="card-title" >{{$user->name}}</h2>
-                    <h3 class="card-subtitle text-muted">{{$user->userType}}</h3>
-                    <h4 class="card-text">{{$user->email}}</h4>
-                    <a class="btn btn-primary" href={{route("admin.show", ['userId' => $user->id])}}>see more details</a>
-                </div>
-            @endforeach
-        @else
-            <div class="d-flex flex-column justify-center">
-                <h1 class="">there are no users</h1>
-                <a class="btn btn-primary " href="{{route('admin.create')}}">create new</a>
-            </div>
-
-    @endif
-
     </div>
 
 

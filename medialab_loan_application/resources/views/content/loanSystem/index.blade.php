@@ -1,44 +1,45 @@
-@extends('layouts.loanSystem')
+@extends('layouts.app')
 
 @section('content')
-    <form action="{{route('loanSystem.index')}}" class="mt-5 mx-5">
-        <div class="row mx-5">
-            <input type="search"
-                   name="searchfield" id="searchfield"
-                   placeholder="search for items"
-                   class="form-control w-25 ">
-            <button type="submit" class="btn btn-primary " style="width: 5em">search</button>
-            <a href="{{route("loanSystem.create")}}" class="btn btn-info mx-2" style="width: 10em">create loan</a>
-            <div class="d-flex flex-row align-items-center py-3">
-                <label for="startDate" class="me-2">Start date:</label>
-                <input type="date"  name="startDate" id="startDate"
-                   class="form-control " style="width: 10em">
-                <label for="endDate" class="mx-2">End date:</label>
-                <input type="date"  name="endDate" id="endDate"
+    <div  style="padding: 0 10vw">
+        <form action="{{route('loanSystem.index')}}" class="mt-10 ">
+            <div class="row mx-5">
+                <input type="search"
+                       name="searchfield" id="searchfield"
+                       placeholder="search for items"
+                       class="form-control w-25 ">
+                <button type="submit" class="bg-blue-600 rounded px-5 py-1.5 mx-1 text-lg font-bold text-white ">search</button>
+                <a href="{{route("loanSystem.create")}}" class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white" >create loan</a>
+                    <label for="startDate" class="me-2 font-bold">Start date:</label>
+                    <input type="date"  name="startDate" id="startDate"
                        class="form-control " style="width: 10em">
+                    <label for="endDate" class="mx-2 font-bold">End date:</label>
+                    <input type="date"  name="endDate" id="endDate"
+                           class="form-control " style="width: 10em">
 
             </div>
-
-        </div>
-    </form>
-    <div class="d-flex flex-wrap rounded bg-light d-inline-block p-5 m-5 ">
-        @if(count($loans) )
-            @foreach($loans as $loan)
-                <div class="card m-3 p-3 d-flex justify-content-between align-content-center" style=" width: 20em;" >
-                    <h3 class="card-title" >{{$loan->item_name}}</h3>
-                    <img src="{{ asset($loan->image) }}" alt="{{$loan->image}}">
-                    <h4>lender:{{$loan->user_name}}</h4>
-                    <p>from {{$loan->start_date}} until {{$loan->end_date}}</p>
-                    <a class="btn btn-primary" href={{route("loanSystem.show", ['loanId' => $loan->id])}}>see more details</a>
+        </form>
+        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-full" style="min-height: 75vh">
+            @if(count($loans) )
+                @foreach($loans as $loan)
+                    <div class="bg-slate-300 rounded m-3 p-3 flex flex-col justify-between content-center h-80" style=" width: 20em;" >
+                        <h3>{{$loan->item_name}}</h3>
+                        <img src="{{ asset($loan->image) }}" alt="{{$loan->image}}"
+                             class="h-1/2">
+                        <h4>lender:{{$loan->user_name}}</h4>
+                        <p>from {{$loan->start_date}} until {{$loan->end_date}}</p>
+                        <a class="bg-blue-600 rounded-full px-5 py-1.5 mx-1 text-lg font-bold text-white text-center"
+                           href={{route("loanSystem.show", ['loanId' => $loan->id])}}>see more details</a>
+                    </div>
+                @endforeach
+            @else
+                <div class="place-self-center flex flex-col">
+                    <h1 class="text-5xl">there are no loans</h1>
+                    <a class="bg-green-600 rounded px-5 py-2 mx-1 text-base font-bold text-white text-center w-32 place-self-center mt-5" href="{{route('loanSystem.create')}}">create new</a>
                 </div>
-            @endforeach
-        @else
-            <div class="d-flex flex-column justify-center">
-                <h1 class="">there are no loans</h1>
-                <a class="btn btn-primary " href="{{route('loanSystem.create')}}">create new</a>
-            </div>
 
-        @endif
+            @endif
+        </div>
     </div>
 
 @endsection

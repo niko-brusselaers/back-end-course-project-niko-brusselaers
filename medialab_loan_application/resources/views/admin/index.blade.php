@@ -20,7 +20,7 @@
 
             </div>
         </form>
-        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-full" style="min-height: 75vh" >
+        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-fit" style="min-height: 75vh" >
 
         @if(count($users) )
                 @foreach($users as $user)
@@ -34,8 +34,8 @@
                 @endforeach
             @else
                 <div class="d-flex flex-column justify-center">
-                    <h1 class="">there are no users</h1>
-                    <a class="btn btn-primary " href="{{route('admin.create')}}">create new</a>
+                    <h1 class="text-5xl">there are no users</h1>
+                    <a class="bg-green-600 rounded px-5 py-2 mx-1 text-base font-bold text-white text-center w-32 place-self-center mt-5" href="{{route('admin.create')}}">create new</a>
                 </div>
 
         @endif

@@ -119,6 +119,9 @@
       <path value="$PROJECT_DIR$/medialab_loan_application/vendor/fakerphp/faker" />
       <path value="$PROJECT_DIR$/medialab_loan_application/vendor/composer" />
       <path value="$PROJECT_DIR$/medialab_loan_application/vendor/monolog/monolog" />
+      <path value="$PROJECT_DIR$/medialab_loan_application/vendor/spatie/laravel-permission" />
+      <path value="$PROJECT_DIR$/medialab_loan_application/vendor/league/flysystem-local" />
+      <path value="$PROJECT_DIR$/medialab_loan_application/vendor/laravel/breeze" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />

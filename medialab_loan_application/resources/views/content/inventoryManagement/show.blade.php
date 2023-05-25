@@ -1,30 +1,35 @@
-@extends('layouts.lendingService')
+@extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-center align-items-center" style="height: 92vh">
-        <div class="d-flex flex-row shadow border rounded p-2">
-            <img src="{{$item->image}}" alt="" class="" style="width: 50em">
-            <div class=" d-flex flex-column justify-content ms-5 " style="height: 70%">
-                <h1 class="mt-3">{{$item->name}}</h1>
-                <h3 class="pt-5">lending status: {{$item->lendingStatus}}</h3>
-                <div class="pt-5">
-                    <h3>last updated: </h3>
+    <div class="flex justify-center items-center" style="height: 80vh">
+        <div class=" bg-slate-300 rounded m-3 p-3 items-center flex flex-row border p-2" style="width: 80%; height: 50%">
+            <img src="{{asset($item->image)}}" alt="{{$item->image}}" class="overflow-hidden" style="height: 100%; width: 100%">
+            <div class=" flex flex-col items-start justify-between ms-5" style="height: 100%; width: 100%">
+                <h1 >{{$item->name}}</h1>
+                <div c>
+                    <h3><b>last updated: </b></h3>
                     <p>{{$item->updated_at}}</p>
                 </div>
-                <div class="pt-3 h-25">
-                    <h2>manual: <br> </h2>
-                    <a href="{{$item->manual}}" class="">
-                        {{$item->manual}}
-                    </a>
+                <div >
+                    <h3><b>updated at: </b></h3>
+                    <p>{{$item->updated_at}}</p>
                 </div>
-                <div class="pt-3 h-25">
-                    <h2>comments: <br> </h2>
+                <div>
+                    <h2> <b>manual:</b> <br> </h2>
+                    <p>{{$item->manual}}</p>
+                </div>
+                <div>
+                    <h2><b>comments:</b> <br> </h2>
                     <p>{{$item->comments}}</p>
                 </div>
 
-                <div class="d-flex w-50 justify-content-between align-item-center" style="">
-                    <a class="btn btn-secondary btn-lg p-2" href="{{route("inventoryManagement.edit", ['itemId' => $item->id])}}">edit item</a>
-                    <a class="btn btn-danger btn-lg p-2 " href={{route("inventoryManagement.delete", ['itemId' => $item->id])}}>delete item</a>
+                <div class="flex flex-row justify-between item-center"  style="width: 100%">
+                    @can("edit item")
+                        <a class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white " href="{{route("inventoryManagement.edit", ['itemId' => $item->id])}}">edit item</a>
+                    @endcan
+                    @can("delete item")
+                            <a class="bg-red-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white " href={{route("inventoryManagement.delete", ['itemId' => $item->id])}}>remove item</a>
+                    @endcan
                 </div>
             </div>
 

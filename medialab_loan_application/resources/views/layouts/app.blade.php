@@ -30,8 +30,10 @@
             <!-- Page Content -->
             <main>
                 @include('partials.error')
-                {{ $slot }}
                 @yield('content')
+                @if(Request::is('profile'))
+                    {{ $slot }}
+                @endif
             </main>
         </div>
     </body>

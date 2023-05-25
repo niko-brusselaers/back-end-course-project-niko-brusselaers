@@ -3,16 +3,19 @@
 @section('content')
     <div  style="padding: 0 10vw">
         <form action="{{route('inventoryManagement.index')}}" class="pt-5 ps-5">
-            <div class="flex">
+
+            <div class="flex w-full">
                 <input type="search"
                        name="searchfield" id="searchfield"
                        placeholder="search for items"
                        class="form-control w-25 ">
-                <button type="submit" class="bg-blue-600 rounded px-5 py-1.5 mx-1 text-lg font-bold text-white" >search</button>
-                <div class="bg-white text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow flex  items-center " style="width: 10em">
+                <button type="submit" class="bg-blue-600 rounded px-5 py-0.5 mx-1 text-lg font-bold text-white" >search</button>
+                <div class="bg-white text-gray-800 font-semibold py-0.5 px-4 border border-gray-400 rounded shadow flex  items-center " style="width: 10em">
                     <input type="checkbox" name="isAvailable" id="isAvailable" class="m-2">
-                    <label for="isAvailable" class="m-2">available</label></div>
+                    <label for="isAvailable" class="m-2">available</label>
                 </div>
+                <a href="{{route("inventoryManagement.create")}}" class="bg-green-600 rounded px-5 py-3 mx-2 text-lg font-bold text-white text-center align-middle" >create item</a>
+            </div>
         </form>
         <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-full" style="min-height: 75vh">
             @if(count($items) )

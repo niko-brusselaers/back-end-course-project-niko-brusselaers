@@ -16,7 +16,7 @@
                     <option value="teacher">teacher</option>
                 </select>
                 <button type="submit" class="bg-blue-600 rounded px-5 py-1.5 mx-1 text-lg font-bold text-white" >search</button>
-                <a href="{{route("admin.create")}}" class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white" >create User</a>
+                <a href="{{route("admin.create")}}" class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white" >create user</a>
 
             </div>
         </form>

@@ -1,49 +1,49 @@
-@extends('layouts.lendingService')
+@extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-center container-fluid" >
+    <div class="flex justify-center items-center" style="height: 80vh" >
         <form action="{{route("inventoryManagement.update")}}"
               method="POST" enctype="multipart/form-data"
-              class="p-5">
-            <div class="row mt-5">
-                <div class="col">
-                    <label for="name" class="form-label">Item Name:</label>
+              class="bg-slate-300 rounded p-10 m-3 flex flex-col justify-around items-center"
+              style="width: 40em; height: fit-content">
+                <div class="flex flex-col mt-5 w-full">
+                    <label for="name" class="form-label font-bold">Item Name:</label>
                     <input type="text"  name="name" id="name"
                            minlength="5" maxlength="60"
                            value="{{$item->name}}" required
                            class="form-control" >
                 </div>
-                <div class="col">
+                <div class="flex flex-col mt-5 w-full">
                     <label for="image"
-                           class="form-label">image:</label>
+                           class="form-label font-bold">image:</label>
                     <input type="file" name="image" id="image"
                            accept=".png,.jpeg,.jpg"
                            class="form-control">
                 </div>
-            </div>
-            <div class="mt-4">
+            <div class="flex flex-col mt-5 justify-center w-full">
                 <label for="manual"
-                       class="form-label">Manual(optional):</label>
+                       class="form-label font-bold">Manual(optional):</label>
                 <textarea name="manual" id="manual" cols="50" rows="5"
                           placeholder="a short series of written instructions"
                           class="form-control">{{$item->manual}}</textarea>
             </div>
-            <div class="mt-4">
+            <div class="flex flex-col mt-5 justify-center  w-full">
                 <label for="comments"
-                       class="form-label">Comments(optional):</label>
+                       class="form-label font-bold">Comments(optional):</label>
                 <textarea name="comments" id="comments" cols="50" rows="8"
                           placeholder="any notes/observations about the product"
                           class="form-control">{{$item->comments}}</textarea>
             </div>
-            <div class="d-flex justify-content-between container-fluid mt-3">
+            <div class="flex justify-between item-center pt-5 w-full">
                 <a href="{{route('inventoryManagement.index')}}"
-                   class="btn btn-secondary btn-lg mt-2 mb-2">cancel</a>
+                   class="bg-blue-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white">cancel</a>
                 <button type="submit"
-                        class="btn btn-primary btn-lg mt-2 mb-2 ">Submit</button>
+                        class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white">Submit</button>
             </div>
             <input type="text" name="id" id="id" value="{{$item->id}}" hidden="true">
             @csrf
         </form>
     </div>
+
 
 @endsection

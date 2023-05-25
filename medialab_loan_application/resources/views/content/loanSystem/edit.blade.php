@@ -1,49 +1,48 @@
-@extends('layouts.loanSystem')
+@extends('layouts.app')
 
 @section('content')
 
     <?php
     $currentDate = date('Y-m-d')
     ?>
-    <div class="d-flex justify-content-center container-fluid" >
+    <div class="flex justify-center items-center" style="height: 80vh">
         <form action="{{route("loanSystem.update")}}"
               method="post" enctype="multipart/form-data"
-              class="p-5">
-            <div class="row mt-5">
-                <div class="col">
-                    <h3 >Item:</h3>
-                    <p>{{$loan->item->name}}</p>
-                </div>
-                <div class="col">
-                    <h3 >User:</h3>
-                    <p>{{$loan->user->first_name." ".$loan->user->last_name}}</p>
+              class="bg-slate-300 rounded p-10 m-3 flex flex-col justify-around items-center"
+              style="width: 40em; height: fit-content">
+                <div class="flex flex-row justify-around w-full">
+                    <div class="flex flex-col items-center">
+                        <h3 ><b>Item:</b></h3>
+                        <p>{{$loan->item->name}}</p>
+                    </div>
+                    <div class="flex flex-col items-center ">
+                        <h3 ><b>User:</b></h3>
+                        <p>{{$loan->user->name}}</p>
+                    </div>
                 </div>
 
-            </div>
 
-            <div class="row mt-5">
-                <div class="col">
+            <div class="flex flex-col mt-5 justify-center w-full" >
                     <label for="endDate"
-                           class="form-label">End date:</label>
+                           class="form-label font-bold">End date:</label>
                     <input type="date"  name="endDate" id="endDate" min="{{$currentDate}}"
                            value="{{$loan->end_date}}"
-                           placeholder="name of product" required
+                           required
                            class="form-control" >
-                </div>
             </div>
 
-            <div class="mt-4">
+            <div class="flex flex-col mt-5 w-full">
                 <label for="comment"
-                       class="form-label">comments(optional):</label>
-                <textarea name="comment" id="comment" cols="50" rows="5"
+                       class="form-label font-bold">comments(optional):</label>
+                <textarea name="comment" id="comment" cols="50" rows="2"
                           class="form-control">@if($loan->comments){{$loan->comment}}@endif</textarea>
             </div>
             <input type="text" name="id" id="id" value="{{$loan->id}}" hidden>
-            <div class="d-flex justify-content-between container-fluid mt-3">
+            <div class="flex justify-between item-center pt-5 w-full">
                 <a href="{{route('loanSystem.index')}}"
-                   class="btn btn-secondary btn-lg mt-2 mb-2">cancel</a>
+                   class="bg-blue-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white">cancel</a>
                 <button type="submit"
-                        class="btn btn-primary btn-lg mt-2 mb-2 ">Submit</button>
+                        class="bg-green-600 rounded px-5 py-2 mx-1 text-lg font-bold text-white">Submit</button>
             </div>
             @csrf
         </form>

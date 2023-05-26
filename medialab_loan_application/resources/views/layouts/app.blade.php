@@ -31,9 +31,6 @@
             <main>
                 @include('partials.error')
                 @yield('content')
-                @if(Request::is('profile'))
-                    {{ $slot }}
-                @endif
             </main>
         </div>
     </body>

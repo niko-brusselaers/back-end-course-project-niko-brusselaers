@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use \Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -30,6 +31,7 @@ class AdminController extends Controller
 
         }
 
+        $users = $users->where('id', '!=', Auth::id());
         //redirect to index page of admin
         return view('admin.index', ['users' => $users->all()]);
     }

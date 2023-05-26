@@ -20,7 +20,7 @@
 
             </div>
         </form>
-        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-fit" style="min-height: 75vh" >
+        <div class="flex flex-wrap justify-center  bg-white mt-10 pt-5 rounded-3xl w-fit" style="min-height: 80vh; width: 80%" >
 
         @if(count($users) )
                 @foreach($users as $user)

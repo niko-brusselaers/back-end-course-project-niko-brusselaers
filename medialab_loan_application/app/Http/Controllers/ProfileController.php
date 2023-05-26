@@ -6,11 +6,24 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
+
+    public  function index(Request $request){
+        $loans= DB::table('loans')
+            ->join('items', 'loans.item_id', '=', 'items.id')
+            ->join('users','loans.user_id', '=', 'users.id')
+            ->select('items.name as item_name', 'items.image','users.name as user_name', 'loans.id','loans.start_date','loans.end_date')
+            ->where('users.id', '=', Auth::id())
+            ->get();
+        return view('dashboard', ['loans' => $loans]);
+    }
+
+
     /**
      * Display the user's profile form.
      */

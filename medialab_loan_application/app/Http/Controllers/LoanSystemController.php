@@ -134,8 +134,7 @@ class LoanSystemController extends Controller
                 return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryStartDate[0]->start_date} and  {$loanedOutQueryStartDate[0]->end_date}"]);
             }
             if (count($loanedOutQueryEndDate)){
-                dd($loanedOutQueryEndDate);
-                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryEndDate->start_date} and  {$loanedOutQueryEndDate->end_date}"]);
+                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryEndDate[0]->start_date} and  {$loanedOutQueryEndDate[0]->end_date}"]);
             }
         }
 

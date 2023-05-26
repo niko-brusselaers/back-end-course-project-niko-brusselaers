@@ -11,9 +11,7 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [ProfileController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Route::prefix('inventoryManagement')->middleware(['auth'])->group(function (){
     Route::get('', [InventoryManagementController::class, "index"])
@@ -84,10 +82,6 @@ Route::prefix('loanSystem')->controller(LoanSystemController::class)->group(func
 
     Route::get('delete',  "delete")->name("loanSystem.delete");
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

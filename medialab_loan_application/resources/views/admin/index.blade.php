@@ -33,7 +33,7 @@
                     </div>
                 @endforeach
             @else
-                <div class="d-flex flex-column justify-center">
+                <div class="place-self-center flex flex-col">
                     <h1 class="text-5xl">there are no users</h1>
                     <a class="bg-green-600 rounded px-5 py-2 mx-1 text-base font-bold text-white text-center w-32 place-self-center mt-5" href="{{route('admin.create')}}">create new</a>
                 </div>

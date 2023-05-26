@@ -13,6 +13,9 @@ use Illuminate\View\View;
 class ProfileController extends Controller
 {
 
+    /**
+     * Display dashboard with list of the user loans
+     */
     public  function index(Request $request){
         $loans= DB::table('loans')
             ->join('items', 'loans.item_id', '=', 'items.id')

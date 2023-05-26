@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="flex justify-center items-center" style="height: 80vh">
         <div class=" bg-slate-300 rounded m-3 p-3 items-center flex flex-row border p-2" style="width: 80%; height: 50%">
             <img src="{{asset($loan->item->image)}}" alt="{{$loan->item->image}}" class="overflow-hidden" style="height: 100%; width: 100%">
@@ -15,10 +14,11 @@
                     <h3><b>updated at: </b></h3>
                     <p>{{$loan->updated_at}}</p>
                 </div>
-                <h3>from: {{$loan->start_date}}</h3>
-                <h3>until:{{$loan->end_date}}</h3>
+                <h3><b>lender:</b> {{$loan->user->name}}</h3>
+                <h3><b>from:</b> {{$loan->start_date}}</h3>
+                <h3><b>until:</b>{{$loan->end_date}}</h3>
                 <div>
-                    <h2>comments: <br> </h2>
+                    <h2><b>comments:</b> <br> </h2>
                     <p>{{$loan->comments}}</p>
                 </div>
 

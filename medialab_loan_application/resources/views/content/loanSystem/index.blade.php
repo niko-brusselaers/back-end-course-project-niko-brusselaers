@@ -27,7 +27,7 @@
                         <img src="{{ asset($loan->image) }}" alt="{{$loan->image}}"
                              class="h-1/2">
                         <h4>lender:{{$loan->user_name}}</h4>
-                        <p>from {{$loan->start_date}} until {{$loan->end_date}}</p>
+                        <p>bfrom {{$loan->start_date}} until {{$loan->end_date}}</p>
                         <a class="bg-blue-600 rounded-full px-5 py-1.5 mx-1 text-lg font-bold text-white text-center"
                            href={{route("loanSystem.show", ['loanId' => $loan->id])}}>see more details</a>
                     </div>

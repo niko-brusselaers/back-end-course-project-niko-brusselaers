@@ -72,8 +72,8 @@ class LoanSystemController extends Controller
     public function create(){
         //get all users name and email adress
         $users = DB::Table('users')
-                        ->select('name','email')
-                        ->get();
+            ->select('name','email')
+            ->get();
 
         //get all item names
         $items = Item::all()->pluck('name');
@@ -99,15 +99,15 @@ class LoanSystemController extends Controller
 
         //get selected item details
         $item = DB::table('items')
-                    ->where('name','=', $request->input('itemName'))
-                    ->get()
-                    ->first();
+            ->where('name','=', $request->input('itemName'))
+            ->get()
+            ->first();
 
         //get selected user details
         $user = DB::table('users')
-                ->where('email','=', $request->input('email'))
-                ->get()
-                ->first();
+            ->where('email','=', $request->input('email'))
+            ->get()
+            ->first();
         //if no item could be found throw back error
         if (empty($item)){
             return redirect()->back()->withErrors(['item'=> 'item does not exist']);
@@ -120,21 +120,20 @@ class LoanSystemController extends Controller
 
         //check if item doesn't already have any loans
         $itemLoans = DB::table('loans')
-                        ->where('item_id', '=',$item->id )
-                        ->get();
+            ->where('item_id', '=',$item->id )
+            ->get();
         //if item already has a loan, check if it is available during the selected time
         if ($itemLoans->isNotEmpty()){
             $startDate = date($request->input('startDate'));
             $endDate = $request->input('endDate');
-            $loanedOutQueryStartDate = $itemLoans->whereBetween('start_date',[$startDate,$endDate])->all();
-            $loanedOutQueryEndDate = $itemLoans->whereBetween('end_date',[$startDate,$endDate])->all();
-
+            $loanedOutQueryStartDate = $itemLoans->whereBetween('start_date',[$startDate,$endDate])->first();
+            $loanedOutQueryEndDate = $itemLoans->whereBetween('end_date',[$startDate,$endDate])->first();
             //if it unavailable, send back error stating loan lend out period
-            if (count($loanedOutQueryStartDate)){
-                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryStartDate[0]->start_date} and  {$loanedOutQueryStartDate[0]->end_date}"]);
+            if ( !empty($loanedOutQueryStartDate )){
+                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryStartDate->start_date} and  {$loanedOutQueryStartDate->end_date}"]);
             }
-            if (count($loanedOutQueryEndDate)){
-                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryEndDate[0]->start_date} and  {$loanedOutQueryEndDate[0]->end_date}"]);
+            if (!empty($loanedOutQueryEndDate)){
+                return redirect()->back()->withErrors(['item'=> "{$request->input('itemName')} is loaned out from {$loanedOutQueryEndDate->start_date} and  {$loanedOutQueryEndDate->end_date}"]);
             }
         }
 
